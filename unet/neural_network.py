@@ -6,11 +6,11 @@ Created on Sat Dec 21 18:54:10 2019
 """
 import os
 import sys
-from model import unet
 import numpy as np
 import skimage
 from skimage import io
 import skimage.transform as trans
+from unet.model import unet
 
 if getattr(sys, 'frozen', False):
     path_weights  = os.path.join(sys._MEIPASS, 'unet/')
@@ -55,6 +55,7 @@ def prediction(im, is_pc, pretrained_weights=None):
         res: the predicted distribution of probability of the labels (numpy array)
     """        
     # pad with zeros such that is divisible by 16
+    print(im.shape)
     (nrow, ncol) = im.shape
     row_add = 16-nrow%16
     col_add = 16-ncol%16
