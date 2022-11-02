@@ -1,4 +1,5 @@
 import skimage.exposure
+import numpy as np
 import cv2
 
 from unet.neural_network import prediction, threshold
@@ -6,7 +7,7 @@ from unet.segment import segment
 
 DATAPATH = "example_data"
 OUTPUTPATH = "output_data"
-FILEPATH = "14.tif"
+FILEPATH = "channel2_time0.tif"
 # FILEPATH = "2020_3_19_frame_100_cropped.tif"
 
 
@@ -31,12 +32,19 @@ predctionOutput = prediction(im=im, is_pc=False)
 saveImage(predctionOutput,"prediction.png")
 
 #get the threshold to use in segmentation, you can also add a second argument here if desired
-thresholdOutput = threshold(predctionOutput,0.5)
+segvalue = np.linspace(1, 10, 10)
+print(segvalue)
+
+thresholdOutput = threshold(predctionOutput)
 saveImage(thresholdOutput,"threshold.png")
 
-#Get the segmentation Mask
-finalOutput = segment(thresholdOutput,predctionOutput,2)
-saveImage(finalOutput,"segment.png")
+for value in segvalue:
+    #Get the segmentation Mask
+    finalOutput = segment(thresholdOutput,predctionOutput,value)
+    saveImage(finalOutput,f"segment_{value}.png")
+
+
+
 
 
 
