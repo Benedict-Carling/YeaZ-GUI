@@ -7,7 +7,7 @@ from unet.segment import segment
 
 DATAPATH = "example_data"
 OUTPUTPATH = "output_data"
-FILEPATH = "channel2_time0.tif"
+FILEPATH = "channel0_fov0_Z2_time0-3.tif"
 # FILEPATH = "2020_3_19_frame_100_cropped.tif"
 
 
