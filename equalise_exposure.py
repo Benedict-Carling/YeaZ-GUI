@@ -7,7 +7,7 @@ from unet.segment import segment
 
 DATAPATH = "example_data"
 OUTPUTPATH = "output_data"
-FILEPATH = "IMG_0818.PNG"
+FILEPATH = "po1-b.tif"
 # FILEPATH = "2020_3_19_frame_100_cropped.tif"
 
 
@@ -39,7 +39,5 @@ print(segvalue)
 thresholdOutput = threshold(predctionOutput)
 saveImage(thresholdOutput, "threshold.png")
 
-for value in segvalue:
-    # Get the segmentation Mask
-    finalOutput = segment(thresholdOutput, predctionOutput, value)
-    saveImage(finalOutput, f"segment_{value}.png")
+finalOutput = segment(thresholdOutput, predctionOutput)
+saveImage(finalOutput, "segment.png")
